@@ -1,0 +1,118 @@
+:root {
+  --bg: #101114;
+  --text: #ece7dc;
+  --border: #35323a;
+  --accent: #00d4aa;
+  --muted: #8b8791;
+  --accent-bg: rgba(0, 212, 170, 0.1);
+  --accent-bg-subtle: rgba(0, 212, 170, 0.06);
+  --warn: #e6c200;
+  --danger: #ff4444;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark scrollbars — the native light track/thumb clashes with the theme.
+   Firefox uses scrollbar-color/-width; Chromium uses ::-webkit-scrollbar. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 6px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Dark-theme checkbox — replaces the native white box / blue check so it
+   reads on the dark surface. Checked state fills with --accent and draws a
+   dark checkmark. Range sliders / radios keep their native accent-color. */
+input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  display: inline-grid;
+  place-content: center;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg);
+  cursor: pointer;
+}
+input[type='checkbox']:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+input[type='checkbox']:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+input[type='checkbox']:checked::after {
+  content: '';
+  width: 3px;
+  height: 7px;
+  margin-top: -2px;
+  border: solid var(--bg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+input[type='checkbox']:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 1px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

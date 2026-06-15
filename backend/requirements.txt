@@ -1,0 +1,33 @@
+# Runtime deps for the Onion Rabbithole backend.
+# Pin floors are conservative; B1 should lock these to exact versions once the venv is built
+# on the target machine. See PREFLIGHT.md.
+
+fastapi>=0.115,<0.120
+uvicorn[standard]>=0.32,<0.36
+aiohttp>=3.10,<4.0
+aiohttp-socks>=0.9,<0.11
+pydantic>=2.9,<3.0
+# Brotli response decompression. Lets onion egress advertise
+# `Accept-Encoding: gzip, deflate, br` — matching the Tor Browser request
+# profile (security/net.py). aiohttp only decodes `br` when this is installed.
+brotli>=1.1,<2.0
+
+# DB + indexing
+sqlite-vec>=0.1.6,<0.2
+
+# Crawler / parsing
+pyahocorasick>=2.1,<3.0
+beautifulsoup4>=4.12,<5.0
+lxml>=5.3,<6.0
+
+# Graph algorithms
+networkx>=3.4,<4.0
+# NetworkX 3.x ships PageRank as a scipy-only implementation; without scipy
+# `nx.pagerank` raises ModuleNotFoundError at first call.
+scipy>=1.13,<2.0
+
+# Embeddings (CPU-only; pulls onnxruntime). Heavy; first install is several hundred MB.
+fastembed>=0.4,<0.6
+
+# Standard library helpers used in security/auth (no install — just here as a reminder):
+# hmac, secrets, hashlib are stdlib.
